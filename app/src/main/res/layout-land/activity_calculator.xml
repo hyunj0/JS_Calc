@@ -131,8 +131,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textOn="1/x"
-                android:textOff="x"
+                android:textOn="INV"
+                android:textOff="inv"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
 

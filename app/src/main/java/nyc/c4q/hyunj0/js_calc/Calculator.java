@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import java.util.Stack;
 
@@ -277,7 +278,7 @@ public class Calculator extends ActionBarActivity {
             factorial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("!");
+                    preview.append("fac(");
                 }
             });
         }
@@ -399,14 +400,24 @@ public class Calculator extends ActionBarActivity {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                expression = preview.getText().toString();
-                if (!expression.isEmpty())
-                    preview.setText(expression.substring(0,expression.length()-1));
+                    expression = preview.getText().toString();
+                    if (!expression.isEmpty())
+                        preview.setText(expression.substring(0, expression.length() - 1));
+                }
+            });
+        }
+        if (inverse != null) {
+            inverse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked())
+                        Toast.makeText(getApplicationContext(), "Inverse Mode on for \nsin, cos, tan, ln, log, √, ^", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Inverse Mode off", Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
-
     public boolean isParenMatch (String expression) {
         Stack<Character> stack = new Stack<Character>();
         char paren;

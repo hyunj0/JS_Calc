@@ -762,6 +762,17 @@ public class Expression {
                 return new BigDecimal(d, mc);
             }
         });
+        addFunction(new Function("FAC", 1) {
+            @Override
+            public BigDecimal eval(List<BigDecimal> parameters) {
+                double d = parameters.get(0).doubleValue();
+                double factor = 1.0;
+                for (double i = 1.0; i <= d; i++) {
+                    factor = factor * i;
+                }
+                return new BigDecimal(factor, mc);
+            }
+        });
         addFunction(new Function("ROUND", 2) {
             @Override
             public BigDecimal eval(List<BigDecimal> parameters) {
