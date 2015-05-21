@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import java.util.Stack;
 
 //Sarah will be the back-end gal with Joshelyn as her sidekick!!
 
@@ -178,6 +179,7 @@ public class Calculator extends ActionBarActivity {
                 preview.append("/");
             }
         });
+
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,9 +192,34 @@ public class Calculator extends ActionBarActivity {
                     expression = expression.replace("√", "SQRT");
                 if (expression.contains("ANS"))
                     expression = expression.replace("ANS", answer);
-                Expression calculate = new Expression(expression);
-                answer = calculate.eval().toString();
-                preview.setText(answer);
+                if (expression.contains("∞")) {
+                    preview.setText(answer);
+                    return;
+                } else if (expression.contains("-∞")) {
+                    preview.setText(answer);
+                    return;
+                }
+
+                try {
+                    if (isParenMatch(expression)) {
+                        Expression calculate = new Expression(expression);
+                        answer = calculate.eval().toPlainString();
+                        if (answer.length() > preview.length())
+                            answer = calculate.eval().toString();
+                        preview.setText(answer);
+                    } else {
+                        preview.setText("Mismatched Parentheses");
+                    }
+                } catch (ArithmeticException e) {
+                    if (!expression.contains("-") || expression.contains("-0")) {
+                        answer = "∞";
+                        preview.setText(answer);
+                    } else if (expression.contains("-")) {
+                        answer = "-∞";
+                        preview.setText(answer);
+                    }
+                }
+
             }
         });
         if (clear != null) {
@@ -223,7 +250,8 @@ public class Calculator extends ActionBarActivity {
             pi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("π");
+                    if (!preview.getText().toString().endsWith("π"))
+                        preview.append("π");
                 }
             });
         }
@@ -231,7 +259,8 @@ public class Calculator extends ActionBarActivity {
             e.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("e");
+                    if (!preview.getText().toString().endsWith("e"))
+                        preview.append("e");
                 }
             });
         }
@@ -243,6 +272,7 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
+
         if (factorial != null) {
             factorial.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -375,6 +405,22 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
+    }
+
+    public boolean isParenMatch (String expression) {
+        Stack<Character> stack = new Stack<Character>();
+        char paren;
+        for (int i = 0; i < expression.length(); i++) {
+            paren = expression.charAt(i);
+            if (paren == '(')
+                stack.push(paren);
+            else if (paren == ')')
+                if (stack.empty())
+                    return false;
+                else if (stack.peek() == '(')
+                    stack.pop();
+        }
+        return stack.empty();
     }
 
     @Override
