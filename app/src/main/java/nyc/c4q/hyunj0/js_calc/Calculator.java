@@ -3,6 +3,7 @@ package nyc.c4q.hyunj0.js_calc;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -185,6 +186,17 @@ public class Calculator extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 expression = preview.getText().toString();
+                if (expression.isEmpty()) {
+                    preview.setText("Syntax Error");
+                    return;
+                } else if (expression.startsWith("+") || expression.startsWith("*") || expression.startsWith("/") || expression.startsWith("%")) {
+                    preview.setText("Syntax Error");
+                    return;
+                } else if (expression.endsWith("+") || expression.endsWith("-") || expression.endsWith("*") || expression.endsWith("/")) {
+                    preview.setText("Syntax Error");
+                    return;
+                }
+
                 if (expression.contains("π"))
                     expression = expression.replace("π", "PI");
                 if (expression.contains("%"))
@@ -205,11 +217,9 @@ public class Calculator extends ActionBarActivity {
                     if (isParenMatch(expression)) {
                         Expression calculate = new Expression(expression);
                         answer = calculate.eval().toPlainString();
-                        if (answer.length() > preview.length())
-                            answer = calculate.eval().toString();
                         preview.setText(answer);
                     } else {
-                        preview.setText("Mismatched Parentheses");
+                        preview.setText("Syntax Error");
                     }
                 } catch (ArithmeticException e) {
                     if (!expression.contains("-") || expression.contains("-0")) {
@@ -308,7 +318,7 @@ public class Calculator extends ActionBarActivity {
             expTen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("E");
+                    preview.setText("In the works");
                 }
             });
         }
@@ -410,10 +420,17 @@ public class Calculator extends ActionBarActivity {
             inverse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (inverse.isChecked())
-                        Toast.makeText(getApplicationContext(), "Inverse Mode on for \nsin, cos, tan, ln, log, √, ^", Toast.LENGTH_LONG).show();
-                    else
-                        Toast.makeText(getApplicationContext(), "Inverse Mode off", Toast.LENGTH_LONG).show();
+                    Toast toast;
+                    if (inverse.isChecked()) {
+                        toast = Toast.makeText(getApplicationContext(), "Inverse Mode On for \nsin, cos, tan, ln, log, √, ^", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                    }
+                    else {
+                        toast = Toast.makeText(getApplicationContext(), "Inverse Mode Off for \nsin, cos, tan, ln, log, √, ^", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                        toast.show();
+                    }
                 }
             });
         }
