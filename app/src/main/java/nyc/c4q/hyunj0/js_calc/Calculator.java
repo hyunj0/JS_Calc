@@ -160,25 +160,33 @@ public class Calculator extends ActionBarActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preview.append("+");
+                expression = preview.getText().toString();
+                if (!expression.isEmpty())
+                    preview.append("+");
             }
         });
         subtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preview.append("-");
+                expression = preview.getText().toString();
+                if (!expression.isEmpty())
+                    preview.append("-");
             }
         });
         multiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preview.append("*");
+                expression = preview.getText().toString();
+                if (!expression.isEmpty())
+                    preview.append("*");
             }
         });
         divide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preview.append("/");
+                expression = preview.getText().toString();
+                if (!expression.isEmpty())
+                    preview.append("/");
             }
         });
 
@@ -187,9 +195,6 @@ public class Calculator extends ActionBarActivity {
             public void onClick(View view) {
                 expression = preview.getText().toString();
                 if (expression.isEmpty()) {
-                    preview.setText("Syntax Error");
-                    return;
-                } else if (expression.startsWith("+") || expression.startsWith("*") || expression.startsWith("/") || expression.startsWith("%")) {
                     preview.setText("Syntax Error");
                     return;
                 } else if (expression.endsWith("+") || expression.endsWith("-") || expression.endsWith("*") || expression.endsWith("/")) {
@@ -217,6 +222,8 @@ public class Calculator extends ActionBarActivity {
                     if (isParenMatch(expression)) {
                         Expression calculate = new Expression(expression);
                         answer = calculate.eval().toPlainString();
+                        if (answer.length() > preview.length())
+                            answer = calculate.eval().toString();
                         preview.setText(answer);
                     } else {
                         preview.setText("Syntax Error");
@@ -318,7 +325,7 @@ public class Calculator extends ActionBarActivity {
             expTen.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.setText("In the works");
+                    preview.append("*10^(");
                 }
             });
         }
