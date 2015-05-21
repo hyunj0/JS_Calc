@@ -8,32 +8,48 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#ff77dd77"
+    android:background="#66FFCC"
     tools:context=".Calculator">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
         <TextView
             android:id="@+id/preview"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="2"
+            android:background="@drawable/output_view"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
-            android:textSize="25sp"/>
-
+            android:text="AC"
+            android:background="@drawable/ac_shape"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"/>
+       </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
         <Button
             android:id="@+id/seven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7"/>
+            android:text="7"
+            android:background="@drawable/number_button"
+            android:theme="@style/button_inputs"/>
 
 
         <Button
@@ -54,7 +70,9 @@
             android:id="@+id/divide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="/"/>
+            android:text="/"
+            android:background="@drawable/operation_button"
+            />
 
         </LinearLayout>
 
@@ -75,7 +93,8 @@
                 android:id="@+id/five"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"/>
+                android:text="5"
+                />
 
 
             <Button
@@ -103,7 +122,8 @@
                 android:id="@+id/one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                android:text="1"
+               />
 
 
             <Button
@@ -145,6 +165,7 @@
                 android:id="@+id/point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:text="."/>
 
 
