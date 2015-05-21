@@ -120,8 +120,8 @@ package nyc.c4q.hyunj0.js_calc;
  *   <tr><td>ROUND(<i>expression</i>,precision)</td><td>Rounds a value to a certain number of digits, uses the current rounding mode</td></tr>
  *   <tr><td>FLOOR(<i>expression</i>)</td><td>Rounds the value down to the nearest integer</td></tr>
  *   <tr><td>CEILING(<i>expression</i>)</td><td>Rounds the value up to the nearest integer</td></tr>
- *   <tr><td>LOG(<i>expression</i>)</td><td>Returns the natural logarithm (base e) of an expression</td></tr>
- *   <tr><td>LOG10(<i>expression</i>)</td><td>Returns the common logarithm (base 10) of an expression</td></tr>
+ *   <tr><td>LN(<i>expression</i>)</td><td>Returns the natural logarithm (base e) of an expression</td></tr>
+ *   <tr><td>LOG(<i>expression</i>)</td><td>Returns the common logarithm (base 10) of an expression</td></tr>
  *   <tr><td>SQRT(<i>expression</i>)</td><td>Returns the square root of an expression</td></tr>
  *   <tr><td>SIN(<i>expression</i>)</td><td>Returns the trigonometric sine of an angle (in degrees)</td></tr>
  *   <tr><td>COS(<i>expression</i>)</td><td>Returns the trigonometric cosine of an angle (in degrees)</td></tr>
@@ -204,6 +204,12 @@ public class Expression {
      */
     public static final BigDecimal PI = new BigDecimal(
             "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
+
+    /**
+     * Definition of e as a constant, can be used in expressions as variable.
+     */
+    public static final BigDecimal e = new BigDecimal(
+            "2.7182818284590452353602874713526624977572470936999595749669676277240766303535475945713821785251664274");
 
     /**
      * The {@link java.math.MathContext} to use for calculations.
@@ -742,14 +748,14 @@ public class Expression {
                 return parameters.get(0).abs(mc);
             }
         });
-        addFunction(new Function("LOG", 1) {
+        addFunction(new Function("LN", 1) {
             @Override
             public BigDecimal eval(List<BigDecimal> parameters) {
                 double d = Math.log(parameters.get(0).doubleValue());
                 return new BigDecimal(d, mc);
             }
         });
-        addFunction(new Function("LOG10", 1) {
+        addFunction(new Function("LOG", 1) {
             @Override
             public BigDecimal eval(List<BigDecimal> parameters) {
                 double d = Math.log10(parameters.get(0).doubleValue());
@@ -812,6 +818,7 @@ public class Expression {
         });
 
         variables.put("PI", PI);
+        variables.put("e", e);
         variables.put("TRUE", BigDecimal.ONE);
         variables.put("FALSE", BigDecimal.ZERO);
 
