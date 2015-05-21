@@ -7,14 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.math.BigDecimal;
+import android.widget.ToggleButton;
 
 //Sarah will be the back-end gal with Joshelyn as her sidekick!!
 
 public class Calculator extends ActionBarActivity {
 
-    public
+    private
     //Basic calculator
     Button  point,
             zero, one, two, three, four, five, six, seven, eight, nine,
@@ -27,15 +26,15 @@ public class Calculator extends ActionBarActivity {
             pi, e,
             percentage,
             factorial,
-            inverse,
             sqrt, exp, expTen,
-            log, ln,
+            ln, log,
             sine, cosine, tangent,
-            radians, degrees,
-            ans;
+            ans,
+            delete;
 
-    TextView preview;
-    String expression, answer;
+    private ToggleButton inverse, radToDeg;
+    private TextView preview;
+    private String expression, answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,6 @@ public class Calculator extends ActionBarActivity {
         setContentView(R.layout.activity_calculator);
 
         point = (Button) findViewById(R.id.point);
-
         zero = (Button) findViewById(R.id.zero);
         one = (Button) findViewById(R.id.one);
         two = (Button) findViewById(R.id.two);
@@ -54,44 +52,30 @@ public class Calculator extends ActionBarActivity {
         seven = (Button) findViewById(R.id.seven);
         eight = (Button) findViewById(R.id.eight);
         nine = (Button) findViewById(R.id.nine);
-
         add = (Button) findViewById(R.id.add);
         subtract = (Button) findViewById(R.id.subtract);
         multiply = (Button) findViewById(R.id.multiply);
         divide = (Button) findViewById(R.id.divide);
-
         equals = (Button) findViewById(R.id.equals);
-
         clear = (Button) findViewById(R.id.clear);
-
         openParen = (Button) findViewById(R.id.openParen);
         closeParen = (Button) findViewById(R.id.closeParen);
-
         pi = (Button) findViewById(R.id.pi);
         e = (Button) findViewById(R.id.e);
-
         percentage = (Button) findViewById(R.id.percentage);
-
         factorial = (Button) findViewById(R.id.factorial);
-
-        inverse = (Button) findViewById(R.id.inverse);
-
         sqrt = (Button) findViewById(R.id.sqrt);
         exp = (Button) findViewById(R.id.exp);
         expTen = (Button) findViewById(R.id.expTen);
-
-        log = (Button) findViewById(R.id.log);
         ln = (Button) findViewById(R.id.ln);
-
+        log = (Button) findViewById(R.id.log);
         sine = (Button) findViewById(R.id.sine);
         cosine = (Button) findViewById(R.id.cosine);
         tangent = (Button) findViewById(R.id.tangent);
-
-        radians = (Button) findViewById(R.id.radians);
-        degrees = (Button) findViewById(R.id.degrees);
-
         ans = (Button) findViewById(R.id.ans);
-
+        delete = (Button) findViewById(R.id.delete);
+        inverse = (ToggleButton) findViewById(R.id.inverse);
+        radToDeg = (ToggleButton) findViewById(R.id.rad_to_deg);
         preview = (TextView) findViewById(R.id.preview);
 
         point.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +92,6 @@ public class Calculator extends ActionBarActivity {
                 }
             }
         });
-
         zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,7 +152,6 @@ public class Calculator extends ActionBarActivity {
                 preview.append("9");
             }
         });
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,17 +176,16 @@ public class Calculator extends ActionBarActivity {
                 preview.append("/");
             }
         });
-
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 expression = preview.getText().toString();
                 if (expression.contains("π"))
                     expression = expression.replace("π", "PI");
-                if (expression.contains("√"))
-                    expression = expression.replace("√", "SQRT");
                 if (expression.contains("%"))
                     expression = expression.replace("%", "/100");
+                if (expression.contains("√"))
+                    expression = expression.replace("√", "SQRT");
                 if (expression.contains("ANS"))
                     expression = expression.replace("ANS", answer);
                 Expression calculate = new Expression(expression);
@@ -212,7 +193,6 @@ public class Calculator extends ActionBarActivity {
                 preview.setText(answer);
             }
         });
-
         if (clear != null) {
             clear.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -221,7 +201,6 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
-
         if (openParen != null) {
             openParen.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -238,18 +217,11 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
-
         if (pi != null) {
             pi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     preview.append("π");
-                }
-            });
-            factorial.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    preview.append("!");
                 }
             });
         }
@@ -261,7 +233,6 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
-
         if (percentage != null) {
             percentage.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -270,7 +241,6 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
-
         if (factorial != null) {
             factorial.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -279,12 +249,14 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
-
         if (sqrt != null) {
             sqrt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("√(");
+                    if (inverse.isChecked())
+                        preview.append("^2");
+                    else
+                        preview.append("√(");
                 }
             });
         }
@@ -292,7 +264,10 @@ public class Calculator extends ActionBarActivity {
             exp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("^");
+                    if (inverse.isChecked())
+                        preview.append("^(1/");
+                    else
+                        preview.append("^");
                 }
             });
         }
@@ -304,29 +279,43 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
-
-        if (log != null) {
-            log.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    preview.append("log(");
-                }
-            });
-        }
         if (ln != null) {
             ln.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.append("ln(");
+                    if (inverse.isChecked())
+                        preview.append("e^");
+                    else
+                        preview.append("ln(");
                 }
             });
         }
-
+        if (log != null) {
+            log.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked())
+                        preview.append("10^");
+                    else
+                        preview.append("log(");
+                }
+            });
+        }
         if (sine != null) {
             sine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.setText("sin(");
+                    if (inverse.isChecked()) {
+                        if (radToDeg.isChecked())
+                            preview.append("asin(");
+                        else
+                            preview.append("asin(deg(");
+                    } else {
+                        if (radToDeg.isChecked())
+                            preview.append("sin(");
+                        else
+                            preview.append("sin(deg(");
+                    }
                 }
             });
         }
@@ -334,7 +323,17 @@ public class Calculator extends ActionBarActivity {
             cosine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.setText("cos(");
+                    if (inverse.isChecked()) {
+                        if (radToDeg.isChecked())
+                            preview.append("acos(");
+                        else
+                            preview.append("acos(deg(");
+                    } else {
+                        if (radToDeg.isChecked())
+                            preview.append("cos(");
+                        else
+                            preview.append("cos(deg(");
+                    }
                 }
             });
         }
@@ -342,11 +341,20 @@ public class Calculator extends ActionBarActivity {
             tangent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    preview.setText("tan(");
+                    if (inverse.isChecked()) {
+                        if (radToDeg.isChecked())
+                            preview.append("atan(");
+                        else
+                            preview.append("atan(deg(");
+                    } else {
+                        if (radToDeg.isChecked())
+                            preview.append("tan(");
+                        else
+                            preview.append("tan(deg(");
+                    }
                 }
             });
         }
-
         if (ans != null) {
             ans.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -355,6 +363,30 @@ public class Calculator extends ActionBarActivity {
                 }
             });
         }
+        if (delete != null) {
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                expression = preview.getText().toString();
+                if (!expression.isEmpty())
+                    preview.setText(expression.substring(0,expression.length()-1));
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        final TextView savedPreview = (TextView) findViewById(R.id.preview);
+        outState.putString("savedPreview", savedPreview.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        final TextView preview = (TextView) findViewById(R.id.preview);
+        preview.setText(savedInstanceState.getString("savedPreview"));
     }
 
     @Override
