@@ -1,5 +1,6 @@
 package nyc.c4q.hyunj0.js_calc;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,7 +41,8 @@ public class Calculator extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         point = (Button) findViewById(R.id.point);
         zero = (Button) findViewById(R.id.zero);
         one = (Button) findViewById(R.id.one);
