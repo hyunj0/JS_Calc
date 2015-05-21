@@ -1,16 +1,21 @@
 <!--Joshelyn will be the front end gal with Sarah as her sidekick!!-->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#44663399"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+<<<<<<< HEAD
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="#CC99FF"
     tools:context=".Calculator"
   >
+=======
+    tools:context=".Calculator">
+>>>>>>> master
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,6 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="wrap_content"
             >
 
@@ -43,6 +49,12 @@
                 android:theme="@style/button_white" />
         </LinearLayout>
 
+=======
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/output_view"
+            android:textSize="15sp" />
+>>>>>>> master
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,6 +72,7 @@
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
 
+<<<<<<< HEAD
             <Button
                 android:id="@+id/radians"
                 android:layout_width="0dp"
@@ -78,6 +91,16 @@
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
 
+=======
+            <ToggleButton
+                android:id="@+id/rad_to_deg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/operation_button"
+                android:textOn="DEG"
+                android:textOff="RAD"/>
+>>>>>>> master
 
             <Button
                 android:id="@+id/factorial"
@@ -85,18 +108,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="x!"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
             <Button
                 android:id="@+id/openParen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="("
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="(" />
+>>>>>>> master
 
 
             <Button
@@ -104,9 +135,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text=")"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text=")" />
+>>>>>>> master
 
 
             <Button
@@ -114,9 +149,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="%"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="%" />
+
+
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AC" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DEL" />
+>>>>>>> master
 
         </LinearLayout>
 
@@ -127,15 +181,20 @@
             android:orientation="horizontal"
             android:layout_marginTop="5dp">
 
-            <Button
+            <ToggleButton
                 android:id="@+id/inverse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="1/x"
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textOn="1/x"
+                android:textOff="x"/>
+>>>>>>> master
 
 
             <Button
@@ -144,9 +203,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="sin"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
 
             <Button
@@ -155,18 +218,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="ln"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
             <Button
                 android:id="@+id/seven"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="7"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="7" />
+>>>>>>> master
 
 
             <Button
@@ -174,9 +245,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="8"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="8" />
+>>>>>>> master
 
 
             <Button
@@ -184,9 +259,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="9"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="9" />
+>>>>>>> master
 
 
             <Button
@@ -194,9 +273,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="/"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="÷" />
+>>>>>>> master
 
         </LinearLayout>
 
@@ -212,11 +295,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="pi"
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"
                 />
+=======
+                android:text="π"
+                android:textAllCaps="false" />
+>>>>>>> master
 
 
             <Button
@@ -225,9 +313,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="cos"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
 
             <Button
@@ -236,18 +328,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="log"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
             <Button
                 android:id="@+id/four"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="4"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="4" />
+>>>>>>> master
 
 
             <Button
@@ -255,9 +355,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="5"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="5" />
+>>>>>>> master
 
 
             <Button
@@ -265,9 +369,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="6"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="6" />
+>>>>>>> master
 
 
             <Button
@@ -275,9 +383,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="*"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="×" />
+>>>>>>> master
 
         </LinearLayout>
 
@@ -295,9 +407,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="e"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
 
             <Button
@@ -306,9 +422,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="tan"
+<<<<<<< HEAD
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:textAllCaps="false" />
+>>>>>>> master
 
 
             <Button
@@ -316,19 +436,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="sqrt"
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="√"
+                android:textAllCaps="false" />
+>>>>>>> master
 
             <Button
                 android:id="@+id/one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="1"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="1" />
+>>>>>>> master
 
 
             <Button
@@ -336,9 +465,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="2"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="2" />
+>>>>>>> master
 
 
             <Button
@@ -346,9 +479,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="3"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="3" />
+>>>>>>> master
 
 
             <Button
@@ -356,9 +493,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="-"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="-" />
+>>>>>>> master
 
         </LinearLayout>
 
@@ -373,6 +514,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:adjustViewBounds="true"
                 android:maxWidth="50dp"
                 android:maxHeight="50dp"
@@ -380,61 +522,95 @@
                 android:layout_marginLeft="19dp"
                 android:layout_marginRight="19dp"
                 android:src="@drawable/bluepaw"/>
+=======
+                android:layout_weight="1"
+                android:text="ANS" />
+
+>>>>>>> master
 
             <Button
                 android:id="@+id/ans"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="ans"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="E" />
+
+>>>>>>> master
 
             <Button
                 android:id="@+id/exp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="x^y"
                 android:textAllCaps="false"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="^"
+                android:textAllCaps="false" />
+>>>>>>> master
 
             <Button
                 android:id="@+id/point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="."
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="0" />
+
+>>>>>>> master
 
             <Button
                 android:id="@+id/zero"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="0"
                 android:background="@drawable/green_number_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="." />
+
+>>>>>>> master
 
             <Button
                 android:id="@+id/equals"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="="
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="=" />
+
+>>>>>>> master
 
             <Button
                 android:id="@+id/add"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+<<<<<<< HEAD
                 android:text="+"
                 android:background="@drawable/pink_operation_button"
                 android:theme="@style/button_black2"/>
+=======
+                android:text="+" />
+>>>>>>> master
 
         </LinearLayout>
 

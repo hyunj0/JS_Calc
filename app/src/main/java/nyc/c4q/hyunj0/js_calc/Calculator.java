@@ -7,29 +7,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 //Sarah will be the back-end gal with Joshelyn as her sidekick!!
 
 public class Calculator extends ActionBarActivity {
 
-    public
+    private
+    //Basic calculator
     Button  point,
             zero, one, two, three, four, five, six, seven, eight, nine,
-            e, pi,
             add, subtract, multiply, divide,
+            equals,
+            clear,
+
+    //Scientific calculator
+            openParen, closeParen,
+            pi, e,
             percentage,
             factorial,
-            inverse,
             sqrt, exp, expTen,
-            log, ln,
+            ln, log,
             sine, cosine, tangent,
-            radians, degrees,
-            equals, ans,
-            openParen, closeParen,
-            clear;
+            ans,
+            delete;
 
-    TextView preview;
-    String expression;
+    private ToggleButton inverse, radToDeg;
+    private TextView preview;
+    private String expression, answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,50 +52,44 @@ public class Calculator extends ActionBarActivity {
         seven = (Button) findViewById(R.id.seven);
         eight = (Button) findViewById(R.id.eight);
         nine = (Button) findViewById(R.id.nine);
-
-        e = (Button) findViewById(R.id.e);
-        pi = (Button) findViewById(R.id.pi);
-
         add = (Button) findViewById(R.id.add);
         subtract = (Button) findViewById(R.id.subtract);
         multiply = (Button) findViewById(R.id.multiply);
         divide = (Button) findViewById(R.id.divide);
-
+        equals = (Button) findViewById(R.id.equals);
+        clear = (Button) findViewById(R.id.clear);
+        openParen = (Button) findViewById(R.id.openParen);
+        closeParen = (Button) findViewById(R.id.closeParen);
+        pi = (Button) findViewById(R.id.pi);
+        e = (Button) findViewById(R.id.e);
         percentage = (Button) findViewById(R.id.percentage);
-
         factorial = (Button) findViewById(R.id.factorial);
-
-        inverse = (Button) findViewById(R.id.inverse);
-
         sqrt = (Button) findViewById(R.id.sqrt);
         exp = (Button) findViewById(R.id.exp);
         expTen = (Button) findViewById(R.id.expTen);
-
-        log = (Button) findViewById(R.id.log);
         ln = (Button) findViewById(R.id.ln);
-
+        log = (Button) findViewById(R.id.log);
         sine = (Button) findViewById(R.id.sine);
         cosine = (Button) findViewById(R.id.cosine);
         tangent = (Button) findViewById(R.id.tangent);
-
-        radians = (Button) findViewById(R.id.radians);
-        degrees = (Button) findViewById(R.id.degrees);
-
-        equals = (Button) findViewById(R.id.equals);
-
         ans = (Button) findViewById(R.id.ans);
-
-        openParen = (Button) findViewById(R.id.openParen);
-        closeParen = (Button) findViewById(R.id.closeParen);
-
-        clear = (Button) findViewById(R.id.clear);
-
+        delete = (Button) findViewById(R.id.delete);
+        inverse = (ToggleButton) findViewById(R.id.inverse);
+        radToDeg = (ToggleButton) findViewById(R.id.rad_to_deg);
         preview = (TextView) findViewById(R.id.preview);
 
         point.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preview.append(".");
+                expression = preview.getText().toString();
+                if (expression.isEmpty()) {
+                    preview.append("0.");
+                } else if (!(Character.isDigit(expression.charAt(expression.length() - 1)))) {
+                    if (expression.charAt(expression.length() - 1) != '.')
+                        preview.append("0.");
+                } else {
+                    preview.append(".");
+                }
             }
         });
         zero.setOnClickListener(new View.OnClickListener() {
@@ -181,10 +180,213 @@ public class Calculator extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 expression = preview.getText().toString();
+                if (expression.contains("π"))
+                    expression = expression.replace("π", "PI");
+                if (expression.contains("%"))
+                    expression = expression.replace("%", "/100");
+                if (expression.contains("√"))
+                    expression = expression.replace("√", "SQRT");
+                if (expression.contains("ANS"))
+                    expression = expression.replace("ANS", answer);
                 Expression calculate = new Expression(expression);
-                preview.setText(calculate.eval().toString());
+                answer = calculate.eval().toString();
+                preview.setText(answer);
             }
         });
+        if (clear != null) {
+            clear.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.setText("");
+                }
+            });
+        }
+        if (openParen != null) {
+            openParen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("(");
+                }
+            });
+        }
+        if (closeParen != null) {
+            closeParen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append(")");
+                }
+            });
+        }
+        if (pi != null) {
+            pi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("π");
+                }
+            });
+        }
+        if (e != null) {
+            e.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("e");
+                }
+            });
+        }
+        if (percentage != null) {
+            percentage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("%");
+                }
+            });
+        }
+        if (factorial != null) {
+            factorial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("!");
+                }
+            });
+        }
+        if (sqrt != null) {
+            sqrt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked())
+                        preview.append("^2");
+                    else
+                        preview.append("√(");
+                }
+            });
+        }
+        if (exp != null) {
+            exp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked())
+                        preview.append("^(1/");
+                    else
+                        preview.append("^");
+                }
+            });
+        }
+        if (expTen != null) {
+            expTen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("E");
+                }
+            });
+        }
+        if (ln != null) {
+            ln.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked())
+                        preview.append("e^");
+                    else
+                        preview.append("ln(");
+                }
+            });
+        }
+        if (log != null) {
+            log.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked())
+                        preview.append("10^");
+                    else
+                        preview.append("log(");
+                }
+            });
+        }
+        if (sine != null) {
+            sine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked()) {
+                        if (radToDeg.isChecked())
+                            preview.append("asin(");
+                        else
+                            preview.append("asin(deg(");
+                    } else {
+                        if (radToDeg.isChecked())
+                            preview.append("sin(");
+                        else
+                            preview.append("sin(deg(");
+                    }
+                }
+            });
+        }
+        if (cosine != null) {
+            cosine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked()) {
+                        if (radToDeg.isChecked())
+                            preview.append("acos(");
+                        else
+                            preview.append("acos(deg(");
+                    } else {
+                        if (radToDeg.isChecked())
+                            preview.append("cos(");
+                        else
+                            preview.append("cos(deg(");
+                    }
+                }
+            });
+        }
+        if (tangent != null) {
+            tangent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (inverse.isChecked()) {
+                        if (radToDeg.isChecked())
+                            preview.append("atan(");
+                        else
+                            preview.append("atan(deg(");
+                    } else {
+                        if (radToDeg.isChecked())
+                            preview.append("tan(");
+                        else
+                            preview.append("tan(deg(");
+                    }
+                }
+            });
+        }
+        if (ans != null) {
+            ans.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preview.append("ANS");
+                }
+            });
+        }
+        if (delete != null) {
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                expression = preview.getText().toString();
+                if (!expression.isEmpty())
+                    preview.setText(expression.substring(0,expression.length()-1));
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        final TextView savedPreview = (TextView) findViewById(R.id.preview);
+        outState.putString("savedPreview", savedPreview.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        final TextView preview = (TextView) findViewById(R.id.preview);
+        preview.setText(savedInstanceState.getString("savedPreview"));
     }
 
     @Override
